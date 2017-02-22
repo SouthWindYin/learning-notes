@@ -31,19 +31,19 @@ Entry的重要属性有*key,value,next*
 #### hashmap的存取实现
 存储时
 
-    `int hash = key.hashCode();
+    int hash = key.hashCode();
 
     int index = hash % Entry[].length;
 
-    Entry[index] = value;`
+    Entry[index] = value;
 
 取值时
 
-    `int hash = key.hashCode();
+    int hash = key.hashCode();
 
     int index = hash % Entry[].length;
 
-    return Entry[index];`
+    return Entry[index];
 
 put
 
