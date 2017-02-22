@@ -39,3 +39,10 @@ hashmap结和了数组和链表的优点，既满足了寻址容易也满足了�
 
 put
 
+    public V put(K key,V value) {
+        if(key == null)
+            return putForNullKey(value);//null总是放在数组的第一个链表中
+        int hash = hash(key);
+        
+        
+    }
