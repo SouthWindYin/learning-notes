@@ -4,6 +4,7 @@
 
 ## 数组和链表
 数组存储空间连续，占用内存严重，空间复杂度大。数组的二分查找时间复杂度小，为O(1)。
+
 **数组的特点是：寻址容易，插入和删除难**
 
 链表存储空间不连续，占用内存宽松，空间复杂度小，时间复杂度大，为O(N)。
@@ -29,12 +30,14 @@ Entry的重要属性有*key,value,next*
 
 #### hashmap的存取实现
 存储时
-    int hash = key.hashCode();
+    `int hash = key.hashCode();
     int index = hash % Entry[].length;
-    Entry[index] = value;
+    Entry[index] = value;`
+
 取值时
-    int hash = key.hashCode();
+    `int hash = key.hashCode();
     int index = hash % Entry[].length;
-    return Entry[index];
+    return Entry[index];`
+    
 put
 
