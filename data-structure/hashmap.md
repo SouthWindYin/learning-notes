@@ -82,7 +82,7 @@ get
 
 null key的存取
 
-   private V putForNullKey(V value) {
+    private V putForNullKey(V value) {
         for (Entry<K,V> e = table[0]; e != null; e = e.next) {
             if (e.key == null) {
                 V oldValue = e.value;
@@ -104,9 +104,9 @@ null key的存取
         return null;
     }
 
-确定数组index:hashcode % table.length
+确定数组index
 
-   /**
+    /**
      * Returns index for hash code h.
      */
     static int indexFor(int h, int length) {
@@ -132,7 +132,9 @@ table初始大小
 rehash过程
 
     /**
-      * 当hash表容量超过默认容量时，必须调整table大小。当容量达到最大可能时，该方法就将容量调整到Integer.MAX_VALUE返回，这时需要创建一张新表，将原表映射到新表中
+      * 当hash表容量超过默认容量时，必须调整table大小。
+      * 当容量达到最大可能时，该方法就将容量调整到Integer.MAX_VALUE返回，
+      * 这时需要创建一张新表，将原表映射到新表中
       */
     void resize(int newCapacity) {
         Entry[] oldTable = table;
