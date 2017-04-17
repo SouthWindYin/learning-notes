@@ -16,12 +16,16 @@ hashmap结和了数组和链表的优点，既满足了寻址容易也满足了�
 
 初始化的hashmap是一个固定长度的数组（例如16），每个元素存储的是一个链表的头结点，每增加一个对象，在数组的某元素后新增一个结点。新增结点的算法是通过**hash(key)%len**，也就是key值的哈希值模数组的长度得到，如果值为12，则在12处指向新增加的结点。
 
+![HashMap的结构示意图](https://ooo.0o0.ooo/2017/04/17/58f4772403807.png)
+
 #### Entry
-*Entry*是hashmap中的那个线性数组，保存有hashmap的头结点。Entry的重要属性有*key,value,next*
+*Entry*是hashmap中的单个结点，属性有*key,value,next*。
 
 
 #### hashmap的存取实现
 存储时
+
+数组中存储的是最后插入的元素
 
     int hash = key.hashCode();
     int index = hash % Entry[].length;
@@ -35,6 +39,7 @@ hashmap结和了数组和链表的优点，既满足了寻址容易也满足了�
 
 put
 
+    //若key已存在，则返回该key的旧value，并替换新value
     public V put(K key, V value) {
         if (key == null)
             return putForNullKey(value); //null总是放在数组的第一个链表中
@@ -44,7 +49,7 @@ put
         for (Entry<K,V> e = table[i]; e != null; e = e.next) {
             Object k;
             //如果key在链表中已存在，则替换为新value
-            if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
+            if ((e.hash == hash) && ((k = e.key) == key || key.equals(k))) {
                 V oldValue = e.value;
                 e.value = value;
                 e.recordAccess(this);
@@ -70,9 +75,7 @@ get
             return getForNullKey();
         int hash = hash(key.hashCode());
         //先定位到数组元素，再遍历该元素处的链表
-        for (Entry<K,V> e = table[indexFor(hash, table.length)];
-             e != null;
-             e = e.next) {
+        for (Entry<K,V> e = table[indexFor(hash, table.length)];e != null;e = e.next) {
             Object k;
             if (e.hash == hash && ((k = e.key) == key || key.equals(k)))
                 return e.value;
@@ -106,9 +109,7 @@ null key的存取
 
 确定数组index
 
-    /**
-     * Returns index for hash code h.
-     */
+    //返回按hash值找到的链表的下标
     static int indexFor(int h, int length) {
         return h & (length-1);
     }
@@ -149,9 +150,7 @@ rehash过程
         threshold = (int)(newCapacity * loadFactor);
     }
 
-    /**
-     * Transfers all entries from current table to newTable.
-     */
+    //将旧表中的数据转到新表中去
     void transfer(Entry[] newTable) {
         Entry[] src = table;
         int newCapacity = newTable.length;
