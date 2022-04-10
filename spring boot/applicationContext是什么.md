@@ -1,0 +1,12 @@
+# applicationContext是什么
+
+应用上下文，在springboot初始化过程中创建的，servlet应用常用的实现是AnnotationConfigServletWebServerApplicationContext，一个基于注解的应用上下文。应用上下文中包含了AnnotatedBeanDefinitionReader和ClassPathBeanDefinitionScanner的实例。
+
+## 什么是AnnotatedBeanDefinitionReader
+
+用来解析@Configuration注解的Bean
+
+## 什么是ClassPathBeanDefinitionScanner
+
+类扫描器，用于扫描classpath下的类，将其中符合过滤条件的类注册成spring bean并注入到spring容器中
+
