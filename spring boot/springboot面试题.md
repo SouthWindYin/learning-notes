@@ -25,12 +25,12 @@ springboot是用来开发单体应用的，spring cloud是用来开发微服务�
 
 1. 创建一个BootstrapContext
 2. 打开[headless模式](./springboot问答.md)
-3. 从META-INF/spring.factories中加载并实例化SpringApplicationRunListener（应用监听器）的实现类，并放入SpringApplicationRunListeners的实例
-4. 调用所有应用监听器的starting()
+3. 从META-INF/spring.factories中加载并实例化SpringApplicationRunListener（运行监听器）的实现类，并放入SpringApplicationRunListeners的实例
+4. 调用运行监听器的starting()，发布starting的应用事件
 5. 准备环境
-   1. 获取应用启动参数
-   2. 调用所有应用监听器的enviromentPrepared()
-   3. 把准备好的环境绑定到spring应用上
+   1. attatch()获取应用启动参数和系统参数
+   2. 调用运行监听器的enviromentPrepared()，发布enviromentPrepared应用事件。这会触发监听了此事件的应用监听器将自定义的各种application.yml配置绑定到Enviroment里。
+   3. 剩下的不重要...
    4. 返回一个配置好的环境
 6. 设置spring.beaninfo.ignore为true
 7. 打印banner
