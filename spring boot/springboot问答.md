@@ -15,3 +15,23 @@
 - **@ConfigurationProperties(String prefix)** 从已加载的.properties或.yml配置文件中获取指定前缀的属性值，绑定至该类的成员变量上，但是不会自动实例化并放入spring容器，需要配合其他注解\
 - **@EnableConfigurationProperties(Class value[])** 只能传入带有@ConfigurationProperties的类名数组，将这些类绑定配置文件的参数，实例化并放入spring容器，
 - **@EnableAutoConfiguration** 通过 **@import** 导入了spring-boot-autoconfigure包下的127个自动配置类，涵盖了spring boot认证的流行的框架的自动配置
+
+## BoostrapContext是什么
+
+## ApplicationListener是什么
+
+## SpringApplicationRunListener是什么
+
+## Enviroment是什么
+
+## ApplicationContext是什么
+
+应用上下文是BeanFactory的一个实现，它扩展了BeanFactory的功能，包括国际化、文件访问、事件传播等等。springboot项目中优先用这个。
+
+## SpringApplication是什么
+
+## BeanFactory是什么
+
+spring容器指的就是BeanFactory。是用来创建spring bean，存储bean的类。BeanFactory有很多实现，常见的包括XmlBeanFactory（用于根据xml中的配置生成bean）、ApplicationContext（springboot最常用的）等等
+
+## BeanDefinition是什么
