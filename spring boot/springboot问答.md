@@ -20,9 +20,15 @@
 
 ## ApplicationListener是什么
 
+spring框架中对于监听者模式的一种实现，ApplicationListener接口的实现类可以在指定ApplicationEvent被发布出来的时候执行。可以自定义ApplicationEvent，然后通过容器中已经有的ApplicationEventPublisher的bean的publishEvent(new 自定义Event)来发布事件。
+
 ## SpringApplicationRunListener是什么
 
+是一种模板模式的接口，其中包含了springboot启动过程中的很多阶段，包括starting()、enviromentPrepared()、contextPrepared()、contextLoaded()、started()、running()、failed()。该接口的实现类可以定义在每个启动阶段执行特定的逻辑。默认的唯一实现是EventPublishingRunListener，负责在应用启动到该阶段的时候，发布对应的ApplicationEvent，由已经加载的那些ApplicationListener响应。
+
 ## Enviroment是什么
+
+Enviroment是存储该应用的所有Profile（环境）和Property（配置）的，application.yml中的每一项配置就是一个Property，不同的Profile可以有同名的Property。
 
 ## ApplicationContext是什么
 
@@ -30,8 +36,23 @@
 
 ## SpringApplication是什么
 
+用于从java main方法引导spring应用的类，创建SpringApplication的过程将加载spring应用所必须的那些组件。
+
 ## BeanFactory是什么
 
-spring容器指的就是BeanFactory。是用来创建spring bean，存储bean的类。BeanFactory有很多实现，常见的包括XmlBeanFactory（用于根据xml中的配置生成bean）、ApplicationContext（springboot最常用的）等等
+一般说的“spring容器”指的就是BeanFactory。是用来创建spring bean，存储bean的类。BeanFactory有很多实现，常见的包括XmlBeanFactory（用于根据xml中的配置生成bean）、ApplicationContext（springboot最常用的）等等
 
 ## BeanDefinition是什么
+
+是描述某种spring bean的类。一个BeanDefinition中包括了Bean的名称、描述、依赖、scope、是否懒加载等设置信息。BeanFactory根据BeanDefinition来实例化Bean并加入容器中。
+
+## PostProcessor是什么
+
+## BootstrapRegistryInitializer是什么
+
+初始化BootstrapRegistry之前调用的，springboot默认启动过程中并没有实现类。
+
+## ApplicationContextInitializer是什么
+
+用于在容器刷新之前调用该接口实现的initialize方法的接口。一般用于需要对应用程序上下文进行编程初始化的web应用中。加载ApplicationContextInitializer的方法是从spring.factories中读取再实例化。
+

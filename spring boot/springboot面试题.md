@@ -25,7 +25,7 @@ springboot是用来开发单体应用的，spring cloud是用来开发微服务�
 
 1. 创建一个BootstrapContext
 2. 打开[headless模式](./springboot问答.md)
-3. 从META-INF/spring.factories中加载并实例化SpringApplicationRunListener（运行监听器）的实现类，并放入SpringApplicationRunListeners的实例
+3. 从META-INF/spring.factories中加载并实例化SpringApplicationRunListener（运行监听器）的实现类（EventPublishRunListener），并放入SpringApplicationRunListeners的实例
 4. 调用运行监听器的starting()，发布starting的应用事件
 5. 准备环境
    1. attatch()获取应用启动参数和系统参数
@@ -37,9 +37,11 @@ springboot是用来开发单体应用的，spring cloud是用来开发微服务�
 8. 创建一个applicationContext（应用上下文）一般Servlet的应用上下文则是创建的AnnotationConfigServletWebServerApplicationContext实例。这个应用上下文中包含了AnnotatedBeanDefinitionReader实例和ClassPathBeanDefinitionScanner实例。
 9. 设置ApplicationStartup，用于诊断应用启动快慢情况，一般不用。
 10. 准备上下文
-    1. postProcessApplicationContext()预设上下文的一些加载器
-    2. 将之前从spring.factories里加载的初始化器应用到上下文上
+    1. postProcessApplicationContext()准备上下文的一些前置处理
+    2. 将之前从spring.factories里加载的初始化器应用到上下文上，执行各初始化器的initialize()方法
     3. 调用所有监听器的contextPrepared()
     4. 调用BootstrapContext的close()，发布一个关闭BootstrapContext的事件
     5. 调用所有监听器的contextLoaded()
-11.
+11. 刷新上下文
+
+
