@@ -1,4 +1,5 @@
 # ddd自问自答
+
 ## 如何区分factory和repository
 
 factory位于领域层，repository接口位于领域层，实现位于基础设施层。\
