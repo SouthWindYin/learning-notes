@@ -76,10 +76,14 @@ time字段显示执行时间，command字段显示操作类型一般看QUERY就�
 
 ### 处理慢sql
 
-知道哪个sql慢之后，可以使用explain分析sql是否使用索引。主要看explain结果中的type字段，常用的值有6个，all、index、range、ref、eq_ref。从左到右效率越来越高，要优化sql直到type尽量靠右。
+知道哪个sql慢之后，可以使用explain分析sql是否使用索引。主要看explain结果中的type字段，常用的值有6个，all、index、range、ref、eq_ref、const。从左到右效率越来越高，要优化sql直到type尽量靠右。
 
 * all：全表扫描，效率最低。找到结果了也不会停下，直到把所有记录都检查过。
-* 
+* index：全索引扫描，效率比全表稍高。select列中全部是索引，只查了索引，没查表，但是是全部扫描的。
+* range：部分索引扫描。查找了部分索引，常见于where中带有“<”、“<=”、“>”、“>=”、“between”、“in”、“or”
+* ref：重复索引。使用了索引，但是索引列的值不唯一，找到值后要继续小范围扫描，但不是全索引扫描。例如：非唯一索引的条件查找where age=50，因为有多条记录age是50，所以是重复索引。like 'prefix%'找某前缀的索引列。
+* eq_ref：关联唯一索引。当查关联表的主键或者唯一索引时，会用到这个类型，速度仅次于const
+* const：常数级索引最快。对于查主表的主键或是有unique约束的索引会使用const类型，只查找一个索引值，最快。
 
 ## 手动优化sql
 
