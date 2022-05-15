@@ -1,4 +1,4 @@
-## sql优化通用法则
+# sql优化通用法则
 
 1. 尽量减少磁盘访问，io很慢。
 2. 减少返回数据量，网络也很慢。
@@ -29,6 +29,7 @@
 #### 不会被sql优化器优化的规则，则需要手动写sql避免
 
 1. not in语句改写为join关联查询
+
 ## 如何发现并处理慢sql
 
 ### mysql中使用慢查询日志来看，首先看是否打开慢查询日志的开关
@@ -37,7 +38,8 @@
 show variables like '%slow_query%';
 ```
 
-如果slow_query_log的value是OFF，则没打开。如果打开了，则去slow_query_log_file的值的文件中看慢查询  
+如果slow_query_log的value是OFF，则没打开。如果打开了，则去slow_query_log_file的值的文件中看慢查询
+
 ### 查询超过多少秒记录sql到慢查询日志中
 
 ``` sql
@@ -88,3 +90,7 @@ time字段显示执行时间，command字段显示操作类型一般看QUERY就�
 ## 手动优化sql
 
 当知道哪个sql比较慢之后
+
+## sql查询语句解析顺序
+
+from、on、join、where、group by、having、select、distinct、order by、limit
