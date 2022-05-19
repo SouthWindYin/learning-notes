@@ -39,7 +39,7 @@ redis事务实际上就是用MULTI命令和EXEC命令包起来连续执行的一
 
 ## redis事务和pipeline的区别
 
-pipeline是一连串的一起提交的redis命令，是客户端行为，redis服务器是感觉不到区别的。而redis事务是redis服务器上的原子操作（特殊的原子）。
+pipeline是一连串的一起提交的redis命令，是客户端行为，redis服务器是感觉不到区别的。而redis事务是redis服务器上的原子操作（特殊的原子）。一般在使用时，会打开pipeline之后使用multi事务。
 
 ## redis如何清理过期key
 

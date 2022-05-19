@@ -87,10 +87,6 @@ time字段显示执行时间，command字段显示操作类型一般看QUERY就�
 * eq_ref：关联唯一索引。当查关联表的主键或者唯一索引时，会用到这个类型，速度仅次于const
 * const：常数级索引最快。对于查主表的主键或是有unique约束的索引会使用const类型，只查找一个索引值，最快。
 
-## 手动优化sql
-
-当知道哪个sql比较慢之后
-
 ## sql查询语句解析顺序
 
 from、on、join、where、group by、having、select、distinct、order by、limit
