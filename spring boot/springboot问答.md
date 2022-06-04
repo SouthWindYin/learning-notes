@@ -2,7 +2,8 @@
 
 ## aware接口有什么用？
 
-当一个bean内部需要用到该bean的某些定义信息（比如beanName、applicationContext、beanFactory等）的时候，就要实现aware的接口（*BeanNameAware*、*ApplicationContextAware*、*BeanFactoryAware*），每个接口会有一个抽象的setXXX方法，可以在该set方法中使用bean的定义信息，存储或者展示等等。在springboot初始化该bean的时候就会放进去
+当一个bean内部需要用到该bean的某些定义信息（比如beanName、applicationContext、beanFactory等）的时候，就要实现aware的接口（*BeanNameAware*、*ApplicationContextAware*、*BeanFactoryAware*），每个接口会有一个抽象的setXXX方法，可以在该set方法中使用bean的定义信息，存储或者展示等等。在springboot初始化该bean的时候就会放进去  
+aware英文意思是“注意到的、知道的”。在这里意思是“让bean知道XXX组件”，即为注入XXX组件。
 
 ## headless模式是什么？
 
@@ -17,6 +18,8 @@
 - **@EnableAutoConfiguration** 通过 **@import** 导入了spring-boot-autoconfigure包下的127个自动配置类，涵盖了spring boot认证的流行的框架的自动配置
 
 ## BoostrapContext是什么
+
+bootstrap英文意义为“引导程序”，bootstrap context意思是“引导程序的上下文”
 
 ## ApplicationListener是什么
 
@@ -46,7 +49,9 @@ Enviroment是存储该应用的所有Profile（环境）和Property（配置）�
 
 是描述某种spring bean的类。一个BeanDefinition中包括了Bean的名称、描述、依赖、scope、是否懒加载等设置信息。BeanFactory根据BeanDefinition来实例化Bean并加入容器中。
 
-## PostProcessor是什么
+## BeanPostProcessor是什么
+
+Bean后置处理器，在bean实例化并注入容器完成后，在bean的初始化方法initialization()调用前后使用。BeanPostProcessor接口有两个方法：postProcessBeforeInitialization()和postProcessAfterInitialization()。
 
 ## BootstrapRegistryInitializer是什么
 
@@ -55,4 +60,20 @@ Enviroment是存储该应用的所有Profile（环境）和Property（配置）�
 ## ApplicationContextInitializer是什么
 
 用于在容器刷新之前调用该接口实现的initialize方法的接口。一般用于需要对应用程序上下文进行编程初始化的web应用中。加载ApplicationContextInitializer的方法是从spring.factories中读取再实例化。
+
+## spring中有哪些核心概念
+
+### spring bean
+
+是spring中的核心，是spring容器管理的对象，一般是单例模式放在spring容器中。开发中常用的service、controller、配置等对象都是spring bean  
+
+### BeanFactory接口
+
+就是spring的本质，容器。不同的BeanFactory实现有不同的功能，但是都具有最基本的获取bean的功能。常见的实现是springboot中的ApplicationContext。  
+
+### BeanDefinition接口
+
+spring容器创建spring bean对象的模板，里面存储了spring bean的元信息，比如是否单例、class name、依赖的其他bean的名称、是否懒加载、是否可自动注入等信息。所以创建spring bean不是通过new的方式创建的，而是通过BeanDefinition和反射来创建的。
+
+
 
