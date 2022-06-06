@@ -42,6 +42,8 @@ springboot是用来开发单体应用的，spring cloud是用来开发微服务�
     3. 调用所有监听器的contextPrepared()
     4. 调用BootstrapContext的close()，发布一个关闭BootstrapContext的事件
     5. 调用所有监听器的contextLoaded()
-11. 刷新上下文
+11. 刷新上下文参见容器刷新过程
+
+## spring容器刷新过程
 
 
