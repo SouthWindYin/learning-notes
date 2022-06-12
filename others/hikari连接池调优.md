@@ -1,0 +1,3 @@
+# hikari连接池调优
+
+hikari连接池默认配置在com.zaxxer.hikari.HikariConfig类中，主要要关注的参数是CONNECTION_TIMEOUT、IDLE_TIMEOUT、MAX_LIFETIME、DEFAULT_POOL_SIZE，
