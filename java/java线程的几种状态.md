@@ -18,7 +18,7 @@ new一个thread出来，就是进入了初始状态
 
 ### 等待WAITING
 
-调用线程的wait()方法时进入等待状态，直到调用notify()、notifyall()方法，该线程都不会被cpu调度程序选中运行
+调用线程的wait()方法时进入等待状态，直到调用notify()、notifyAll()方法，该线程都不会被cpu调度程序选中运行
 
 ### 超时等待TIMED_WAITING
 
