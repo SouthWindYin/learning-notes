@@ -8,7 +8,7 @@ maven默认有三个内建的生命周期：clean、default、site，每个生�
 
 ## 目标goal和插件plugins
 
-一个goal可以类比于一个maven的函数，它可以影响对应的phase的功能。一个plugins中包含多个goal，可以分别配置。  
+一个goal可以类比于一个maven的函数，它可以影响对应的phase的功能。一个plugin中包含多个goal，可以分别配置。  
 maven的很多phase默认对应着某些内建plugins的goal，详见[官方文档-内建生命周期绑定](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#built-in-lifecycle-bindings)。
 
 ## mvn命令是怎么执行的
