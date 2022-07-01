@@ -10,6 +10,7 @@
     <relativePath /> <!-- lookup parent from repository -->
 </parent>
 ```
+
 当我们要自行创建多模块项目时，子模块的parent标签一般直接改成父模块的groupId、artifactId、version。这时在IDE中开发是没问题的，但是如果我们用mvn程序打包父项目的时候，就会报
 
 ``` info
@@ -27,9 +28,11 @@
 
 前三个代表父级pom的名称，没什么好说的。  
 关键在于第四个relativePath，spring initializer生成的maven项目中，是一个
-``` xml 
+
+``` xml
 <relativePath />
 ```
+
 代表的是从仓库中找pom，而这里的子项目并不能从仓库中找pom，而应该从相对路径上一级直接找pom。对于没有install过的项目来说，本地仓库中其实是没有父pom的，所以第一次mvn install会报错找不到pom。  
 解决办法是删除掉这个标签，没有relativePath标签会默认在上一级相对路径找pom。  
 如果父pom不是在默认的上一级路径的，应该用完整的相对路径指明pom的位置
