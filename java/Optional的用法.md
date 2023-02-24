@@ -2,8 +2,8 @@
 
 ## orElse()和orElseGet()的区别
 
-orElse()只能传入一个对象，orElseGet()可以传入一串逻辑（一个lambda表达式）。 
-orElseGet()方便在有时候需要在Optional没有值的时候，创建一个新对象，新对象还需要初始化一些数据，不是一个简单的new Object()，这时候就更适合用orElseGet()。
+orElse()只能传入一个T对象，orElseGet()可以传入一串逻辑（一个lambda表达式）。 
+orElseGet()方便在：有时候需要在Optional里的T值是null的时候，创建一个新T对象，新T对象还需要初始化一些数据，不是一个简单的new T()，这时候就更适合用orElseGet()。
 
 ``` java
 public void demo() {
