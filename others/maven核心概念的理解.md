@@ -1,24 +1,72 @@
 # maven核心概念
 
-要理解maven是在干什么，就要理解maven的核心概念：lifecycle、phase、goal、plugins等概念
+maven的本质是对源代码执行函数。要理解maven是在干什么，就要理解maven的核心概念：plugins、goal、lifecycle、phase。
 
-## 生命周期lifecycle和步骤phase
+## 插件plugins和目标goal
 
-maven默认有三个内建的生命周期：clean、default、site，每个生命周期包含了一个多步骤组成的序列。比如clean生命周期包含了pre-clean、clean、post-clean三个phase，default最多，详细参见[maven官方文档-生命周期](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#lifecycle-reference)。
+goal就是maven的函数，plugin就是goal的集合，可以看做函数包。由goal去对源代码进行管理。  
 
-## 目标goal和插件plugins
+## 生命周期lifecycle和阶段phase
 
-一个goal可以类比于一个maven的函数，它可以影响对应的phase的功能。一个plugin中包含多个goal，可以分别配置。  
-maven的很多phase默认对应着某些内建plugins的goal，详见[官方文档-内建生命周期绑定](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#built-in-lifecycle-bindings)。
+源代码编译的过程maven分为三个生命周期：clean、default、site，每个生命周期包含了一个多个phase组成的序列。goal可以作用于特定的phase，从而实现每个阶段需要对源代码完成的任务，比如编译、测试、部署等等。
 
-## mvn命令是怎么执行的
+## mvn命令
 
-mvn命令形如`mvn [options] [<goal(s)>] [<phase(s)>]`，我们平时执行的`mvn clean install`命令，就只指定了两个lifecycle的phase，没有指定goal。需注意这里的clean不是lifecycle。goal的命令形如`<plugins>:<goal>`。  
-执行特定phase的时候，会自动按顺序执行该生命周期指定phase前面的所有phase。比如`mvn package`命令，就会执行default生命周期中前17个phase，但是并不是每个phase都有操作，所以实际上并不会太多。`mvn clean install`命令就执行了clean生命周期的前2个phase和default生命周期的前22个phase。  
+mvn命令本质上是执行goals，形如`mvn [options] [<goal(s)>] [<phase(s)>]`
+
+* 其中参数是以`-`开头的。例如：`-Dmaven.test.skip=true`
+* 目标goal形如`<plugins>:<goal>`。例如：`compiler:compile`、`surefire:test`、`deploy:deploy`
+* 多个阶段phase以空格隔开。例如：`clean install`、`package`
+
+maven有一个默认的生命周期绑定机制，对于某些phase，会默认执行某些goal。这是由于maven有一些内建插件造成的。详见[官方文档-内建生命周期绑定](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#built-in-lifecycle-bindings)  
+所以mvn命令可以用`mvn [<phase(s)>]`的命令来执行goal，意思就是执行phase对应的默认goal。    
+指定phases时只能每个生命周期指定一个phase，比如`mvn clean install`即clean生命周期指定的clean phase，default生命周期指定的install phase，且没有指定site生命周期的phase。
+指定phase的时候，会把该生命周期从开始到指定phase中所有对应的goals按顺序执行一遍。例如：`mvn compile`命令，对应default生命周期的前7个phases，会按顺序执行每个phase对应的goals。如果phase没有对应goal，就跳过该phase。  
+根据pom.xml中的packaging参数不同，phase对应的goal会有变化。例如：packaging为`war`的时候，`package` phase对应的goal为`war:war`，而packaging为`jar`的时候，`package` phase对应的goal为`jar:jar`。
 
 ### mvn命令的参数
 
 mvn参数实际上并不需要写在goal和phase之前，写在任何位置都可以，习惯上更多写在后面，只要用短横线开头的就代表是参数。比如`mvn clean install -D maven.test.skip=true`、`mvn clean -U package -Dmaven.test.skip=true -Pdev`都是合法的写法。  
 这里建议参数-D和后面的值maven.test.skip=true最好中间加一个空格，比较易读且在PowerShell中不会出错（-Dmaven.test.skip=true的写法在PowerShell中应该写为-D'maven.test.skip'=true）。
 
+## 附录1：生命周期列表
+
+### Clean Lifecycle
+
+* pre-clean
+* clean
+* post-clean
+
+### Default Lifecycle
+
+* validate
+* initialize
+* generate-sources
+* process-sources
+* generate-resources
+* process-resources
+* compile
+* process-classes
+* generate-test-sources
+* process-test-sources
+* generate-test-resources
+* process-test-resources
+* test-compile
+* process-test-classes
+* test
+* prepare-package
+* package
+* pre-integration-test
+* integration-test
+* post-integration-test
+* verify
+* install
+* deploy
+  
+### Site Lifecycle
+
+* pre-site
+* site
+* post-site
+* site-deploy
 
