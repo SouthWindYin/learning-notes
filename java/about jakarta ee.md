@@ -20,7 +20,7 @@ CDI全称Context and Dependency Injection，spring众所周知是以DI Dependenc
 
 ## 一些报告
 
-[jakarta ee正在复兴，份额仅次于spring/spring boot](https://zhuanlan.zhihu.com/p/410944115)
+[jakarta ee正在复兴，份额仅次于spring、spring boot](https://zhuanlan.zhihu.com/p/410944115)
 
 ## GlassFish 
 
@@ -30,11 +30,12 @@ CDI全称Context and Dependency Injection，spring众所周知是以DI Dependenc
 
 jakarta ee定义了三种应用服务器规范（platform、web profile、core profile），所以只有实现了这三种的任意一种的全部规范，才能称为一个应用服务器。而tomcat主要实现的是jakarta servlet规范（还有Jakarta Servlet, Jakarta Server Pages, Jakarta Expression Language, Jakarta WebSocket, Jakarta Annotations and Jakarta Authentication），所以它只能称为一个web服务器或者servlet容器，不能叫应用服务器。
 
-但是由于tomcat小，和可以嵌入其他应用的特性，spring boot用它为基础开发web应用就特别“实惠”，所以得到了市场的青睐。
+但是由于tomcat小，和可以快速嵌入其他应用的特性，spring boot用它为基础web平台开发web应用就特别“实惠”，所以得到了市场的青睐。
 
 ## jakarta ee应用和spring应用的区别
 
-* spring boot可以打包成jar一键运行，使用内嵌的tomcat servlet容器；而jakarta ee必须要有应用服务器，虽然应用服务器现在可以以embedded的方式启动，但是还是比spring boot多了一步。
-* 开发的过程来说，spring不用了解太多应用整体架构，就可以直接就某一处业务逻辑开始编码，因为spring boot已经默认配置好了运行的一切条件。而jakarta ee应用要对一些规范有个初步的理解，要知道应用服务器的基本使用方法，才能开始编码，相对复杂一些。
+* spring boot可以打包成jar一键运行，使用内嵌的tomcat servlet容器；而jakarta ee应用必须部署在应用服务器上，必须首先启动一个应用服务器。虽然应用服务器现在可以以embedded的方式启动，但是还是比spring boot多了启动和部署的步骤。
+* 开发的过程来说，spring不用了解太多应用整体架构，就可以直接就某一处业务逻辑开始编码，因为spring boot已经以约定的方式默认配置好了运行的一切条件。而jakarta ee应用要对一些规范有个初步的理解，要知道应用服务器的基本使用方法，才能开始编码，相对复杂一些。
+* spring boot的应用是类似于java se的结构的，调试它就和调试一个javase应用一样简单。而jakarta ee应用开发时是war，要debug时需要部署到应用服务器上，再使用应用服务器的JPDA接口远程调试war，相对麻烦。而且jakarta ee应用的log是直接打印在服务器日志中的，在ide中查看日志不是很方便。
 * jakarta ee的应用不依赖于具体实现，开发都是用jakarta ee规范，实现取决于用什么应用服务器，这更具有可移植性。spring开发每一个组件都要自己引入项目，代码对组件的依赖度很高，开发到后期的时候，移植的成本是巨大的。
 * jakarta ee的war应用包很小，不占空间，因为里面只有代码，几乎没有组件实现的jar包（jakarta ee应用也可以加入第三方jar）。spring的应用需要把所有的组件放进jar包中，所以包很大。

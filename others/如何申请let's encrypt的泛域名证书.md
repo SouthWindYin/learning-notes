@@ -44,7 +44,7 @@ Ubuntu 20.10预装了snapd，直接使用
 `wget aliyun-cli-linux-latest-amd64.tgz`\
 `tar xzvf aliyun-cli-linux-latest-amd64.tgz`\
 `sudo cp aliyun /usr/local/bin`\
-安装完成后需要配置[凭证信息](https://help.aliyun.com/document_detail/110341.html)\
+安装完成后需要配置[凭证信息](https://help.aliyun.com/document_detail/110341.html)
 
 ## 获取阿里云DNS api调用脚本
 
