@@ -1,9 +1,9 @@
 # kubernetes manifest描述文件
 
-是一个k8s集群对象的描述文件，它描述了该对象的多方面的特征，k8s负责实现这些特征。
-manifest文件包含了k8s api的版本、类型、元数据、特性等信息。
+是一个k8s集群对象的描述文件，它描述了该对象的多方面的特征，k8s根据manifest文件的描述来在集群中创建该对象。
+manifest文件包含了kubernetes api的版本、对象类型、对象元数据、对象特性等信息。  
 可以用来描述Service、ReplicaSet、Deployment等对象  
-这个文件作用类似于maven的pom.xml，maven程序负责实现pom中描述的内容
+这个文件作用类似于maven的pom.xml，maven程序负责创建pom中描述的程序
 
 ## 文件结构
 

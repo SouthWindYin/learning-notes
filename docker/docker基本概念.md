@@ -67,7 +67,23 @@ docker运行的实例单位，运行一个容器相当于运行一个子系统�
 
 `docker rm [容器ID]`删除某个容器，容器id可以只输前面几位，只要保证能唯一定位到一个容器即可。例如：容器id为*abc123*，可以使用`docker rm a`来删除该容器，若还有一个容器以a开头，则不会删除，需要使用`docker rm ab`来删除该容器。
 
-### 导出镜像
+### 导出
 
-`docker export`
+有`docker export`和`docker save`两种，要注意区分  
+* `docker export -o [输出文件名] [容器ID]`将某个容器的文件系统导出为一个容器tar
+* `docker save -o [输出文件名] [一个或多个镜像]`将一个或多个镜像打包为一个镜像tar，没有产生新的镜像
+
+### 导入
+
+有`docker import`和`docker load`，注意区分。export对应import，save对应load，最好不要搞混了
+* `docker import`导入一个容器包
+* `docker load`导入一个镜像包
+
+### 查看所有卷
+
+`docker volume ls`
+
+### 清除没使用的卷
+
+`docker volume prune`该命令有一定风险，如果准备启动某些镜像要使用某个已经存在的卷，这种就会清除掉。
 

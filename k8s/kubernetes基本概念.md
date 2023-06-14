@@ -58,10 +58,15 @@ service也是运行在某个node上的，他类似于网关的，指定一个对
 
 ## helm k8s包管理工具
 
-* 就像apt之于ubuntu，helm是管理k8s集群的包管理工具，他的包名叫chart。helm也有自己的仓库chart repository。chart运行在k8s集群中，就称为一个release。
+* 就像apt之于ubuntu，helm是管理k8s集群的包管理工具，他的包叫chart。helm也有自己的仓库chart repository。chart运行在k8s集群中的实例，就称为一个release。
 * 每一个release有他唯一的release name，如果你要安装两个数据库，就要产生两个数据库chart的release。
 * helm创建chart的语法涉及到go语言
 * oda部署canvas组件，使用的是部署helm chart的方式
+
+### helm常用命令
+
+* `helm install [chart名称] [chart路径]`在default命名空间根据指定路径创建一个chart，命名为指定的名称
+* `helm status [release名称] --show-desc`查看指定名称的release
 
 ## k8s镜像仓库
 
@@ -70,10 +75,11 @@ service也是运行在某个node上的，他类似于网关的，指定一个对
 
 # kubectl使用方法
 
-kubectl是用来管理k8s集群的命令
+kubectl是用来管理k8s集群的命令，调用kubectl的命令，等同于请求Kubernetes API的接口。
 
 * `kubectl get [资源]`：获取集群中某个资源的列表
 * `kubectl label [资源] [资源名] [标签名]=[标签值]`：给某个指定名称的资源增加一个键值对的标签
+* `kubectl apply -f [manifest文件名]`：在k8s集群应用该manifest文件中描述的资源，可以是创建资源，也可以是更改资源
 
 # minikube 使用方法和特性
 
