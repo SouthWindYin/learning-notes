@@ -77,7 +77,7 @@ docker运行的实例单位，运行一个容器相当于运行一个子系统�
 
 有`docker import`和`docker load`，注意区分。export对应import，save对应load，最好不要搞混了
 * `docker import`导入一个容器包
-* `docker load`导入一个镜像包
+* `docker load --input [输入文件名]`导入一个镜像包
 
 ### 查看所有卷
 

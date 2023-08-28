@@ -9,4 +9,5 @@ interface-name1=instance-name1,instance-name2
 interface-name2=instance-name3
 ```
 
-则可以实例化对应接口的实现。
+则可以实例化对应接口的实现，并作为spring bean放入spring容器。\
+spring boot中使用这种机制来初始化各种autoConfiguration类

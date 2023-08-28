@@ -23,6 +23,19 @@ docker官方提供了registry镜像供用户搭建私有仓库，需要先在能
 * `docker tag henry/demo 127.0.0.1:5000/henry/demo`给镜像打一个标签，指明私有仓库地址，不指定仓库地址则默认docker.io中央仓库
 * `docker push 127.0.0.1:5000/henry/demo`推送镜像至对应私有仓库
 
+## 删除私有仓库中的镜像
+
+* 进入docker registry所在的容器，打开删除镜像的配置，重启docker registry
+  * `docker exec -it [容器id] /bin/sh`
+  * `vi /etc/docker/registry/config.yml`
+  * 配置**storage.delete.enabled=true**
+  * 退出容器，执行`docker restart [容器id]`
+* 获取镜像摘要`curl --header "Accept: application/vnd.docker.distribution.manifest.v2+json" -I -X GET http://私有仓库地址/v2/镜像名/manifests/镜像版本
+`中的**Docker-Content-Digest**，是sha开头的一串哈希值
+* 删除镜像`curl -I -X DELETE http://私有仓库地址/v2/镜像名/manifests/镜像摘要
+`
+* 检查删除是否成功`curl --header "Accept: application/vnd.docker.distribution.manifest.v2+json" -I -X GET http://私有仓库地址/v2/镜像名/manifests/镜像版本`，返回404则表示删除成功
+
 ## 使用sonatype nexus镜像仓库时的坑
 
 * 创建镜像仓库时需要配置一个额外的端口，比如http的8082。如果使用的docker镜像方式启动的nexus，则需要在创建容器时就把8082端口开放出来，再在nexus系统中创建镜像仓库并绑定容器内的8082端口。

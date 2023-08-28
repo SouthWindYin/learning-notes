@@ -11,11 +11,11 @@ aware英文意思是“注意到的、知道的”。在这里意思是“让bea
 
 ## 配置相关的注解有哪些
 
-- **@Import** 实例化指定的类，并将其放入spring容器\
-- **@ImportResource** 指定spring的xml配置文件路径，并将里面配置好的bean放入spring容器\
-- **@ConfigurationProperties(String prefix)** 从已加载的.properties或.yml配置文件中获取指定前缀的属性值，绑定至该类的成员变量上，但是不会自动实例化并放入spring容器，需要配合其他注解\
-- **@EnableConfigurationProperties(Class value[])** 只能传入带有@ConfigurationProperties的类名数组，将这些类绑定配置文件的参数，实例化并放入spring容器，
-- **@EnableAutoConfiguration** 通过 **@import** 导入了spring-boot-autoconfigure包下的127个自动配置类，涵盖了spring boot认证的流行的框架的自动配置
+- **@Import** 实例化指定的类，并将其放入spring容器
+- **@ImportResource** 指定spring的xml配置文件路径，并将里面配置好的bean放入spring容器
+- **@ConfigurationProperties(String prefix)** 从已加载的.properties或.yml配置文件中获取指定前缀的属性值，绑定至该类的成员变量上，但是不会自动把该类实例化为一个bean，需要配合 **@EnableConfigurationProperties(Class value[])** 使用
+- **@EnableConfigurationProperties(Class value[])** 只能传入带有@ConfigurationProperties的类名数组，将这些类绑定配置文件的参数，实例化并放入spring容器
+- **@EnableAutoConfiguration** 通过 **@Import** 导入了spring-boot-autoconfigure包下的127个自动配置类，涵盖了spring boot认证的流行的框架的自动配置
 
 ## BoostrapContext是什么
 
