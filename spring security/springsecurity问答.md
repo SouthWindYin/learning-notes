@@ -6,9 +6,9 @@
 
 ## spring security怎么起作用的
 
-首先要知道[spring是怎么使用servlet的Filter的](../spring/spring中的一些特殊组件.md)
+首先要知道[spring是怎么使用servlet的Filter的](../spring%20boot/spring中的一些特殊组件.md)
 
-springsecurity提供了一个Filter，名叫FilterChainProxy。spring security在FilterChainProxy中维护了一组SecurityFilterChain的List，每一个SecurityFilterChain里定义了一组Filter，当请求来的时候，根据请求地址分发到对应的SecurityFilterChain中，执行对应的那一组Filter，达到过滤请求的目的。spring security总共提供了15个Filter，这15个Bean Filter完成了权限验证的所有工作。
+spring security提供了一个Filter，名叫FilterChainProxy。spring security在FilterChainProxy中维护了一组SecurityFilterChain的List，每一个SecurityFilterChain里定义了一组Filter，当请求来的时候，根据请求地址分发到对应的SecurityFilterChain中，执行对应的那一组Filter，达到过滤请求的目的。spring security总共提供了15个Filter，这15个Bean Filter完成了权限验证的所有工作。
 
 ## 开发人员要做什么
 
@@ -16,7 +16,7 @@ springsecurity提供了一个Filter，名叫FilterChainProxy。spring security�
 
 ## 如何配置这15个Bean Filter
 
-现在流行的方法是，自定义一个继承了WebSecurityConfigurerAdapter的配置类，重写configure()，通过HttpSecurity对象来配置。那15个Bean Filter每个都使用一个或多个继承自SecurityConfigurerAdapter的Configurer来配置它，例如：ExpressionUrlAuthorizationConfigurer对应使用FormLoginConfigurer来配置。
+现在流行的方法是，自定义一个继承了SecurityConfigurerAdapter的配置类，重写configure()，通过HttpSecurity对象来配置。那15个Bean Filter每个都使用一个或多个继承自SecurityConfigurerAdapter的Configurer来配置它，例如：ExpressionUrlAuthorizationConfigurer对应使用FormLoginConfigurer来配置。
 
 ### 具体配置方法（以配置ExpressionUrlAuthorizationConfigurer为例）
 
@@ -87,3 +87,8 @@ public class LoginService implements UserDetailsService{
 
 ## 如何使用基于JSR-250注解的权限验证
 
+## spring security的csrf验证是怎么做的
+
+* 不是每个请求都需要csrf验证，目前发现/login请求需要，我猜想后端生成页面中的请求才需要csrf验证，rest接口不用。比如login page中的/login接口需要验证，rest资源接口不用。
+* 当某个请求/login返回页面时，其中包含的可提交的表单会多一个input type=hidden的name="_csrf"的字段，其value为后端随机生成填入的csrf token。并且返回该页面时也会有Set-Cookie字段以新建session
+* post提交该页面的表单/login时，会在参数中附上_csrf的token，后端会根据该次session和csrf进行比对。都对上了则通过csrf检查，session对不上或者csrf对不上都无法通过csrf检查。
