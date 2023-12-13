@@ -4,7 +4,7 @@
 
 ## Meter 表
 
-micrometer就是为管理一系列的meter而生的，meter有很多种类，包括*Timer, Counter, Gauge, DistributionSummary, LongTaskTimer, FunctionCounter, FunctionTimer, TimeGauge*，meter是由registry生成和管里的
+micrometer就是为管理一系列的meter而生的，meter有很多种类，包括*Timer, Counter, Gauge, DistributionSummary, LongTaskTimer, FunctionCounter, FunctionTimer, TimeGauge*，meter是由registry生成和管理的
 
 ## Registry 登记处
 
