@@ -35,3 +35,7 @@ meter创建时的一些提示性标签。tag分为meter的tag和registry的commo
 ### DistributionSummary 分布概要
 
 用于记录事件的分布情况，表示一段时间范围内对数据进行采样，可以用于统计网络请求平均时延
+
+## Micrometer Observation API
+
+## Micrometer Tracing
