@@ -2,7 +2,7 @@
 
 类似于slf4j，micrometer提供了一套观测、监控jvm应用的包装接口，它可以对接到多种监控系统中。
 
-## Meter 表
+## Meter 度量指标
 
 micrometer就是为管理一系列的meter而生的，meter有很多种类，包括*Timer, Counter, Gauge, DistributionSummary, LongTaskTimer, FunctionCounter, FunctionTimer, TimeGauge*，meter是由registry生成和管理的
 
@@ -12,7 +12,7 @@ micrometer就是为管理一系列的meter而生的，meter有很多种类，包
 
 ## Tag 标签
 
-meter创建时的一些提示性标签。tag分为meter的tag和registry的common tag。
+meter创建时的一些提示性标签。tag分为meter的tag和registry的common tag。common tag是全局的，是所有的指标都会包含的tag，比如版本号、实例ID等标签
 
 ## Measurement 取样值
 
